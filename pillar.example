@@ -23,10 +23,11 @@ consul:
       - 2.2.2.2
 
   register:
-    - name: Redis
-      checks:
-        - script: /usr/local/share/consul/check_redis.py
-          interval: 10s
+    Redis:
+      - name: Redis
+        checks:
+          - script: /usr/local/share/consul/check_redis.py
+            interval: 10s
   scripts:
     - source: salt://files/consul/check_redis.py
       name: /usr/local/share/consul/check_redis.py

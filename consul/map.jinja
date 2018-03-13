@@ -18,4 +18,14 @@
   ,merge=consul)
 %}
 
+{% set register = [] %}
+
+{% for checkList in consul.register.values() %}
+  {% for check in checkList %}
+    {% do register.append(check) %}
+  {% endfor %}
+{% endfor %}
+
+{% do consul.update({"register": register}) %}
+
 {% do consul.config.update({'retry_join': consul.config.retry_join or []}) %}
