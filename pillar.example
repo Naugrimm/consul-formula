@@ -30,11 +30,10 @@ consul:
     data_dir: /var/consul
 
   register:
-    Redis:
-      - name: Redis
-        checks:
-          - script: /usr/local/share/consul/check_redis.py
-            interval: 10s
+    - name: Redis
+      checks:
+        - script: /usr/local/share/consul/check_redis.py
+          interval: 10s
   scripts:
     - source: salt://files/consul/check_redis.py
       name: /usr/local/share/consul/check_redis.py

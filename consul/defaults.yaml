@@ -20,5 +20,5 @@ consul:
     retry_join: []
     retry_interval: 30s
     datacenter: "main"
-  register: {}
+  register: []
   scripts: []
