@@ -1,4 +1,4 @@
-{%- from slspath+"/map.jinja" import consul with context -%}
+{%- from tpldir+"/map.jinja" import consul with context -%}
 
 consul-init-env:
   file.managed:
@@ -18,7 +18,7 @@ consul-init-env:
 consul-init-file:
   file.managed:
     {%- if salt['test.provider']('service').startswith('systemd') %}
-    - source: salt://{{ slspath }}/files/consul.service
+    - source: salt://{{ tpldir }}/files/consul.service
     - name: /etc/systemd/system/consul.service
     - template: jinja
     - context:
@@ -26,11 +26,11 @@ consul-init-file:
         group: {{ consul.group }}
     - mode: 0644
     {%- elif salt['test.provider']('service') == 'upstart' %}
-    - source: salt://{{ slspath }}/files/consul.upstart
+    - source: salt://{{ tpldir }}/files/consul.upstart
     - name: /etc/init/consul.conf
     - mode: 0644
     {%- else %}
-    - source: salt://{{ slspath }}/files/consul.sysvinit
+    - source: salt://{{ tpldir }}/files/consul.sysvinit
     - name: /etc/init.d/consul
     - mode: 0755
     {%- endif %}
