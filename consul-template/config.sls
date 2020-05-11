@@ -12,6 +12,9 @@ consul-template-tmpl-file-{{ loop.index }}:
   file.managed:
     - source: {{ tmpl.source }}
     - name: /etc/consul-template/tmpl-source/{{ tmpl.name }}.ctmpl
+    {%- if "context" in tmpl %}
+    - context: {{ tmpl.context|json }}
+    {%- endif %}
     {%- if "template_engine" in tmpl %}
     - template: {{ tmpl.template_engine }}
     {%- endif %}
